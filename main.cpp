@@ -12,9 +12,10 @@ using namespace cv;
 int main()
 {
 	Contour kontury;
-	ContoursDetector detector("D:/abckompressed.JPG",kontury);
+	ContoursDetector detector("D:/kart.PNG",kontury);
 	namedWindow("canny",1);
-	detector.findContoursCanny();
+	detector.setCannyParams(true,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE);
+	detector.findContoursCanny();//problem function with parameters and then in callback without
 	detector.showCannyEffect("canny","canny effect");
 	waitKey(0);
 	
