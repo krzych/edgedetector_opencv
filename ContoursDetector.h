@@ -38,5 +38,8 @@ public:
 																	 //deafult only external contours, no chain approximations
 	void showCannyEffect(const string& windowName,const string& effectWindow);
 	void showUpdate(const string& windowName);
+	Contour* getObjectContours() {return m_objectContours;}
+	void calculateContoursMoments();
+	void calculateMassCenters(); //moments must be calculated!, ensure in function
 };
 

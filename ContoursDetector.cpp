@@ -66,3 +66,34 @@ void ContoursDetector::showUpdate(const string& windowName)
 {
 	imshow(windowName,m_cannyOutput);
 }
+
+void ContoursDetector::calculateContoursMoments()
+{
+	/*for(int i=0; i<m_objectContours->contours()->size();i++)
+	{
+		Mat temp(m_objectContours->contours()->at(i),false);
+		(m_objectContours->contours())->at(i);
+		m_objectContours->contoursMoments()->at(i)=moments(temp,false);
+	}*/
+	for(vector<vector<Point>>::iterator i=m_objectContours->contours()->begin();i<m_objectContours->contours()->end();i++)
+	{
+		Mat temp(*i,false);
+		m_objectContours->contoursMoments()->push_back(moments(temp,false));
+	}
+}
+
+void ContoursDetector::calculateMassCenters()
+{
+	for(vector<Moments>::iterator i=m_objectContours->contoursMoments()->begin(); 
+		i<m_objectContours->contoursMoments()->end();i++)
+	{
+		m_objectContours->massCenters()->push_back(Point2f(i->m10/i->m00 , i->m01/i->m00));
+	}
+	for(int i=0;i<m_objectContours->massCenters()->size();i++)
+	{
+		cout<<" "<<m_objectContours->massCenters()->at(i).x<<" "<<m_objectContours->massCenters()->at(i).y;
+
+		circle(m_cannyOutput,m_objectContours->massCenters()->at(i),5,Scalar(255,255,255));
+		imshow("abc",m_cannyOutput);
+	}
+}

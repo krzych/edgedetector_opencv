@@ -19,3 +19,13 @@ vector<Vec4i>* Contour::hierarchy()
 {
 	return &m_hierarchy;
 }
+
+vector<Moments>* Contour::contoursMoments()
+{
+	return &m_moments;
+}
+
+vector<Point2f>* Contour::massCenters()
+{
+	return &m_massCenters;
+}
